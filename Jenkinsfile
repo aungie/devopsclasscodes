@@ -3,7 +3,9 @@ pipeline{
         jdk 'my_jdk'
         maven 'my_maven'
     }
-    agent any
+    agent{
+        label 'windows'
+    }
     stages{
         stage('checkout'){
             steps{
