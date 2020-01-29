@@ -14,12 +14,12 @@ pipeline{
         }
         stage('compile'){
             steps{
-                sh 'mvn compile'
+                bat 'mvn compile'
             }
         }
         stage('codereview'){
             steps{
-                sh 'mvn pmd:pmd'
+                bat 'mvn pmd:pmd'
             }
             post {
                 success {
@@ -29,7 +29,7 @@ pipeline{
         }
         stage('unittest'){
             steps{
-                sh 'mvn test'
+                bat 'mvn test'
             }
             post {
                 success {
@@ -39,7 +39,7 @@ pipeline{
         }
         stage('metriccheck'){
             steps{
-                sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+                bat 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
             }
             post {
                 success {
@@ -49,7 +49,7 @@ pipeline{
         }
         stage('package'){
             steps{
-                sh 'mvn package'
+                bat 'mvn package'
             }
         }
     }
