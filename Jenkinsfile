@@ -1,23 +1,23 @@
-pipeline{
-    tools{
+pipeline {
+    tools {
         jdk 'my_jdk'
         maven 'my_maven'
     }
-    agent{
+    agent {
         label 'windows'
     }
-    stages{
-        stage('checkout'){
+    stages {
+        stage('checkout') {
             steps{
                 git 'https://github.com/aungie/devopsclasscodes'
             }
         }
-        stage('compile'){
-            steps{
+        stage('compile') {
+            steps {
                 bat 'mvn compile'
             }
         }
-        stage('codereview'){
+        stage('codereview') {
             steps{
                 bat 'mvn pmd:pmd'
             }
@@ -27,8 +27,8 @@ pipeline{
                 }
             }
         }
-        stage('unittest'){
-            steps{
+        stage('unittest') {
+            steps {
                 bat 'mvn test'
             }
             post {
@@ -37,8 +37,8 @@ pipeline{
                 }
             }
         }
-        stage('metriccheck'){
-            steps{
+        stage('metriccheck') {
+            steps {
                 bat 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
             }
             post {
@@ -47,8 +47,8 @@ pipeline{
                 }
             }
         }
-        stage('package'){
-            steps{
+        stage('package') {
+            steps {
                 bat 'mvn package'
             }
         }
