@@ -4,7 +4,7 @@ pipeline {
         maven 'my_maven'
     }
     agent {
-        label 'windows'
+        label 'linux'
     }
     stages {
         stage('checkout') {
@@ -14,12 +14,12 @@ pipeline {
         }
         stage('compile') {
             steps {
-                bat 'mvn compile'
+                sh 'mvn compile'
             }
         }
         stage('codereview') {
             steps{
-                bat 'mvn pmd:pmd'
+                sh 'mvn pmd:pmd'
             }
             post {
                 success {
@@ -29,7 +29,7 @@ pipeline {
         }
         stage('unittest') {
             steps {
-                bat 'mvn test'
+                sh 'mvn test'
             }
             post {
                 success {
@@ -39,7 +39,7 @@ pipeline {
         }
         stage('metriccheck') {
             steps {
-                bat 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
+                sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
             }
             post {
                 success {
@@ -49,7 +49,7 @@ pipeline {
         }
         stage('package') {
             steps {
-                bat 'mvn package'
+                sh 'mvn package'
             }
         }
     }
